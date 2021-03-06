@@ -101,3 +101,6 @@ var discountedAlbums = albums.Where(discountFilterExpression);
 
 [Dynamic Expression From String](https://www.strathweb.com/2018/01/easy-way-to-create-a-c-lambda-expression-from-a-string-with-roslyn/)
 
+# Utilities
+
+[Clipboard History](https://dailydotnettips.com/view-clipboard-ring-history-in-visual-studio-2019/)
