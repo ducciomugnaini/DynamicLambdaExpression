@@ -5,8 +5,7 @@
 Just about every application requires some form of data access and query capability. Using the data classes and data set illustrated in Listing 1 and Listing 2 respectively, you can employ the following query to find all people with the first name of John:
 
 ``` c#
-var result = _people.Where(person => person.FirstName
- == "John").ToList();
+var result = _people.Where(person => person.FirstName == "John").ToList();
 ```
 Lambda expressions, like is the one illustrated above, are very powerful. There is also some inflexibility, although you can easily vary the value you use to compare to the FirstName property. What if you want to vary the property? That is, as it turns out, a bit more complicated.
 
@@ -17,8 +16,7 @@ The key to understanding how to create dynamic lambda expressions rests with und
 
 ``` c#
 var parameterExpression =
- Expression.Parameter(Type.GetType("ExpressionTreeTests.
-Person"), "person");
+ Expression.Parameter(Type.GetType("ExpressionTreeTests.Person"), "person");
 ```
 
 Once you have you parameter expression, you can begin to build the additional components. The following code creates an expression constant:
@@ -30,8 +28,7 @@ var constant = Expression.Constant("John");
 The expression constant has to be compared to some property. The code in the next snippet creates a property expression.
 
 ``` c#
-var property = Expression.Property(parameterExpression,
- "FirstName");
+var property = Expression.Property(parameterExpression, "FirstName");
 ```
 
 Note that the parameter expression created earlier is used to validate the property. If the property name passed as a string isn’t found for the specified type, an error is thrown.
@@ -51,8 +48,7 @@ The expression variable’s string representation is:
 Once an expression has been created, you can create a lambda expression. The next code snippet accomplishes that task:
 
 ``` c#
-var lambda = Expression.Lambda<Func<Person,
- bool>>(expression, parameterExpression);
+var lambda = Expression.Lambda<Func<Person, bool>>(expression, parameterExpression);
 ```
 
 In this case, the lambda represents a delegate function that accepts a Person argument and returns a Boolean value to indicate whether the specified Person object meets the query criteria. In this case, the query criterion is whether the FirstName == "John". The following illustrates the string representation of the dynamic lambda expression:
